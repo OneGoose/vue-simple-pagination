@@ -1,35 +1,36 @@
-# vue-pomodoro
-> A pomodoro clock component with Vue.js
+# vue-simple-pagination
+> A simple pagination component with Vue.js
 
-Based on the component of [vue-radial-progress](https://github.com/wyzant-dev/vue-radial-progress)
 # Demo
-http://xiongzixiao.com/vue-pomodoro/
+http://xujianzhen.com/vue-simple-pagination/
 # Requirements
 Vue.js (^2.0)
 # Install
-npm install vue-pomodoro --save
+npm install vue-simple-pagination --save
 # Usage
 ```
 <template>
-  <Pomodoro :total-pomodoro = "totalPomodoro"
-            :work-duration = "25"
-            :diameter = "diameter">
-  </Pomodoro>
+  <Pagination 
+   :total-page = "totalPage"
+   :each-page = "eachPage"
+   :current = "current">
+  </Pagination>
 </template>
 
 <script>
-import Pomodoro from 'vue-pomodoro'
+import Pagination from 'vue-simple-pagination'
 
 export default {
   data () {
     return {
-      diameter: 300
-      totalPomodoro: 4
+      totalPage: 300,
+      current: 4,
+      eachPage: 2
     }
   },
 
   components: {
-    Pomodoro
+    Pagination
   }
 }
 </script>
@@ -37,15 +38,9 @@ export default {
 # Props
 Name | Default value | Description
 ---|:---:|---
-`totalPomodoro` | `4` | The pomodoro clock required to complete the task.
-`workDuration` | `25` | A Pomodoro clock working time(minutes).
-`restDuration` | `5` | A Pomodoro clock rest time(minutes).
-`startColor` | `#CCFFFF` | The color of the leading edge of the pomodoro clock gradient.
-`stopColor` | `#99CCCC` | The secondary color of the pomodoro clock gradient.
-`innerStrokeColor` | `#0099CC` | Background color of the pomodoro clock.
-`strokeWidth` | `10` | The width of the pomodoro clock.
-`innerTextColor` | `#FF6666` | Text color of the inner text.
-`diameter` | `300` | Diameter of the pomodoro clock in pixels.
+`totalPage` | `10` | The Total pages of pagination.
+`current` | `1` | The Current page of pagination.
+`eachPage` | `2` | each side page number of pagination.
 
 # License
 
