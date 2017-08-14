@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Vue Pagination Demo</title>
+    <style>
+      html, body {
+        background: #cccccc;
+        text-align: center;
+        color: #4e4f4f;
+        font-size: 16px;
+        margin: 0;
+      }
+      header {
+        background-color:#0099CC;
+        padding:10px 0px;
+      }
+      #app {
+        display: flex;
+        flex-direction: row;
+        margin-top: 50px;
+      }
+      .pagination-display {
+        margin: auto;
+      }
+      .pagination-display-controls {
+        padding:40px;
+        margin: auto;
+      }
+      input {
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        width: 100%;
+        margin-bottom: 10px;
+      }
+      label {
+        margin-right: 15px;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Vue Pagination Demo</h1>
+      <div class="logo">
+        <a class="github-button" href="https://github.com/xiongzixiao/vue-pagination"><svg xmlns="http://www.w3.org/2000/svg" fill="white" width="32" height="32" viewBox="0 0 16 16"><path d="M8 .198c-4.418 0-8 3.582-8 8 0 3.535 2.292 6.533 5.47 7.59.4.075.548-.173.548-.384 0-.19-.008-.82-.01-1.49-2.227.485-2.696-.943-2.696-.943-.364-.924-.888-1.17-.888-1.17-.726-.497.055-.486.055-.486.802.056 1.225.824 1.225.824.714 1.223 1.872.87 2.328.665.072-.517.28-.87.508-1.07-1.776-.202-3.644-.888-3.644-3.954 0-.874.313-1.588.824-2.148-.083-.202-.357-1.015.077-2.117 0 0 .672-.215 2.2.82.64-.177 1.323-.266 2.003-.27.68.004 1.365.093 2.004.27 1.527-1.035 2.198-.82 2.198-.82.435 1.102.162 1.916.08 2.117.512.56.822 1.274.822 2.147 0 3.072-1.872 3.748-3.653 3.946.288.248.544.735.544 1.48 0 1.07-.01 1.933-.01 2.196 0 .213.145.462.55.384 3.178-1.06 5.467-4.057 5.467-7.59 0-4.418-3.58-8-8-8z"></path></svg></a>
+      </div>
+    </header>
+    <div id="app">
+      <table class="pagination-display-controls">
+        <tr>
+          <td>
+            <label for="total-pagination">Total Pages</label>
+          </td>
+          <td>
+            <input id="total-pagination" type="number" min="1" placeholder="Total Pages" :value="totalPage" @input="totalPageChange">
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="current-page">Current Page</label>
+          </td>
+          <td>
+            <input id="current-page" type="number" min="0" placeholder="Current Page" :value="current" disabled>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="each-number">Each Number(MAX Value <= TotalPage / 2)</label>
+          </td>
+          <td>
+            <input id="each-number" type="number" min="0" :max="Math.floor(this.totalPage / 2)" placeholder="Each Number" :value="eachSideNumber" @input="eachSideNumberChange">
+          </td>
+        </tr>
+      </table>
+      <div class="pagination-display">
+        <Pagination
+          :total = totalPage
+          :current-page = current
+          :each-side-number = eachSideNumber
+        ></Pagination>
+      </div>
+    </div>
+  <script src="https://unpkg.com/vue@2.4.1" charset="utf-8"></script>
+    <script src="./dist/Pagination.min.js"></script>
+
+    <script>
+      Vue.config.debug = true
+      new Vue({
+        el: '#app',
+        components: {
+          Pagination: Pagination.default
+        },
+        data () {
+          return {
+            totalPage: 10,
+            current: 3,
+            eachSideNumber: 2
+          }
+        },
+        methods: {
+          totalPageChange (e) {
+            e.preventDefault()
+            const val = e.target.value
+            if (!val) {
+              return false
+            }
+            this.totalPage = parseInt(val)
+          },
+          eachSideNumberChange (e) {
+            e.preventDefault()
+            const val = e.target.value
+            if (!val) {
+              return false
+            }
+            this.eachSideNumber = parseInt(val)
+          }
+        }
+      })
+    </script>
+  </body>
+</html>
